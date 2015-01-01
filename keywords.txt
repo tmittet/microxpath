@@ -1,0 +1,57 @@
+#######################################
+# Syntax Coloring Map For Test
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MicroXPath	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+reset	KEYWORD2
+validate	KEYWORD2
+setPath	KEYWORD2
+findAttribute	KEYWORD2
+findValue	KEYWORD2
+getValue	KEYWORD2
+
+######################################
+# Instances (KEYWORD2)
+#######################################
+
+state	KEYWORD2
+errors	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+XML_PROLOG	LITERAL1
+
+XML_PARSER_UNINITIATED	LITERAL1
+XML_PARSER_ROOT	LITERAL1
+XML_PARSER_START_TAG	LITERAL1
+XML_PARSER_START_TAG_NAME	LITERAL1
+XML_PARSER_PROLOG_TAG	LITERAL1
+XML_PARSER_PROLOG_TAG_NAME	LITERAL1
+XML_PARSER_PROLOG_END	LITERAL1
+XML_PARSER_PROLOG_ATTRIBUTES	LITERAL1
+XML_PARSER_PROLOG_ATTRIBUTE_VALUE	LITERAL1
+XML_PARSER_ATTRIBUTES	LITERAL1
+XML_PARSER_ATTRIBUTE_VALUE	LITERAL1
+XML_PARSER_ELEMENT_CONTENT	LITERAL1
+XML_PARSER_END_TAG	LITERAL1
+XML_PARSER_COMPLETE	LITERAL1
+
+XML_ERROR_MALFORMED_PROLOG	LITERAL1
+XML_ERROR_MALFORMED_START_TAG	LITERAL1
+XML_ERROR_TAG_START_INSIDE_TAG	LITERAL1
+XML_ERROR_MISSPLACED_END_CHAR	LITERAL1
+XML_ERROR_MALFORMED_END_TAG	LITERAL1
+XML_ERROR_TAG_END_OUTSIDE_TAG	LITERAL1
+XML_ERROR_NOT_WELL_FORMED	LITERAL1
