@@ -60,28 +60,28 @@ class MicroXPath {
     uint8_t state;
     #ifndef XML_PICO_MODE
     uint8_t errors;
-	#endif
-	
+    #endif
+    
     MicroXPath();
 
     void reset();
-	#ifndef XML_PICO_MODE
-	bool validate(char charToParse);
-	#endif
-	void setPath(const char *path[], size_t pathSize);
+    #ifndef XML_PICO_MODE
+    bool validate(char charToParse);
+    #endif
+    void setPath(const char *path[], size_t pathSize);
     bool findValue(char charToParse);
-	bool getValue(char charToParse, char *result, size_t resultSize);
+    bool getValue(char charToParse, char *result, size_t resultSize);
 
   private:
     const char **path;
     size_t pathSize;
-	#ifndef XML_PICO_MODE
+    #ifndef XML_PICO_MODE
     uint8_t tagChecksum;
     uint8_t checksum;
-	#endif
+    #endif
     uint8_t level;
     uint8_t position;
-	uint8_t matchCount;
+    uint8_t matchCount;
     uint8_t matchLevel;
 
     bool find(char charToParse /* , const char *attributeName, const char *attributeValue */);
