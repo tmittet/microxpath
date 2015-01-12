@@ -23,7 +23,7 @@
 #include "Arduino.h"
 
 // When pico mode is enabled, XML validation and error handling is disabled
-//#define XML_PICO_MODE
+#define XML_PICO_MODE
 
 #define XML_PARSER_UNINITIATED 0
 #define XML_PARSER_ROOT 1

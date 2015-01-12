@@ -88,15 +88,13 @@ void loop()
   {
     client.stop();
     Serial.println();
-    if (xPath.errors)
-    {
-      Serial.println("Error: ");
-      Serial.println(xPath.errors, BIN); 
-    }
-    else
-    {
-      Serial.println("DONE");
-    }
+	// Disable XML_PICO_MODE before uncommenting the following:
+    //if (xPath.errors)
+    //{
+    //  Serial.println("Error: ");
+    //  Serial.println(xPath.errors, BIN); 
+    //}
+    Serial.println("DONE");
     while (true);
   }
 }
