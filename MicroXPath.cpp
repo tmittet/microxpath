@@ -42,7 +42,7 @@ void MicroXPath::reset()
 #ifndef XML_PICO_MODE
 bool MicroXPath::validate(char charToParse)
 {
-  if (charToParse == NULL)
+  if (charToParse == 0)
   {
     return state == XML_PARSER_COMPLETE && errors == 0 && checksum == 0;
   }
@@ -116,8 +116,6 @@ bool MicroXPath::find(char charToParse)
       case '<':
         if (state == XML_PARSER_ROOT || state == XML_PARSER_ELEMENT_CONTENT)
         {
-          position = 0;
-          matchCount = 0;
 #ifndef XML_PICO_MODE
           tagChecksum = 0;
 #endif
@@ -129,6 +127,8 @@ bool MicroXPath::find(char charToParse)
           errors |= XML_ERROR_TAG_START_INSIDE_TAG;
         }
 #endif
+        position = 0;
+        matchCount = 0;
         break;
       // Tag end
       case '>':
@@ -139,16 +139,12 @@ bool MicroXPath::find(char charToParse)
           if (tagChecksum) checksum ^= tagChecksum;
 #endif
           level++;
-          position = 0;
-          matchCount = 0;
           state = XML_PARSER_ELEMENT_CONTENT;
         }
         else if (state == XML_PARSER_END_TAG)
         {
           if (level == matchLevel) matchLevel--;
           level--;
-          position = 0;
-          matchCount = 0;
           state = level == 0 ? XML_PARSER_COMPLETE : XML_PARSER_ELEMENT_CONTENT;
 #ifndef XML_PICO_MODE
           if (state == XML_PARSER_COMPLETE && checksum != 0)
@@ -159,8 +155,6 @@ bool MicroXPath::find(char charToParse)
         }
         else if (level == 0 && state == XML_PARSER_PROLOG_END)
         {
-          position = 0;
-          matchCount = 0;
           state = XML_PARSER_ROOT;
         }
         else if (state == XML_PARSER_COMMENT)
@@ -184,6 +178,8 @@ bool MicroXPath::find(char charToParse)
           }
         }
 #endif
+        position = 0;
+        matchCount = 0;
         break;
       // Prolog start and end character
       case '?':

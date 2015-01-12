@@ -88,7 +88,7 @@ void loop()
   {
     client.stop();
     Serial.println();
-	// Disable XML_PICO_MODE before uncommenting the following:
+    // Disable XML_PICO_MODE before uncommenting the following:
     //if (xPath.errors)
     //{
     //  Serial.println("Error: ");
