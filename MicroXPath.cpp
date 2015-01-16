@@ -53,9 +53,9 @@ bool MicroXPath::validate(char charToParse)
 void MicroXPath::setPath(const char *path[], size_t pathSize)
 {
   uint8_t newMatchLevel = 0;
-  for (uint8_t i = 0; i < pathSize && i < this->pathSize && i < matchLevel; i++)
+  for (uint8_t i = 0; i < pathSize && i < this->pathSize && i < matchLevel && i == newMatchLevel; i++)
   {
-    if (strcmp(path[i], this->path[i]) == 0) newMatchLevel = (i + 1);
+    if (strcmp(path[i], this->path[i]) == 0) newMatchLevel++;
   }
   this->matchCount = 0;
   this->matchLevel = newMatchLevel;
@@ -294,7 +294,7 @@ bool MicroXPath::find(char charToParse)
             matchCount == position &&
             level < pathSize &&
             position < strlen(path[level]) &&
-            path[level][position] == charToParse)
+            charToParse == path[level][position])
           {
             matchCount++;
           }
