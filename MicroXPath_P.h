@@ -14,16 +14,17 @@
 /* You should have received a copy of the GNU General Public License    */
 /* along with this library. If not, see <http://www.gnu.org/licenses/>. */
 /*                                                                      */
-/* Written by Thomas Mittet (code@lookout.no) December 2014.            */
+/* Written by Thomas Mittet (code@lookout.no) January 2014.             */
 /************************************************************************/
 
-#ifndef MicroXPath_h
-#define MicroXPath_h
+#ifndef MicroXPath_P_h
+#define MicroXPath_P_h
 
 // When pico mode is enabled, XML validation and error handling is disabled
 #define XML_PICO_MODE
 
 #include "Arduino.h"
+#include "avr/pgmspace.h"
 
 #define XML_PARSER_UNINITIATED 0
 #define XML_PARSER_ROOT 1
@@ -55,25 +56,25 @@
 
 #endif
 
-class MicroXPath {
+class MicroXPath_P {
   public:
     uint8_t state;
     #ifndef XML_PICO_MODE
     uint8_t errors;
     #endif
     
-    MicroXPath();
+    MicroXPath_P();
 
     void reset();
     #ifndef XML_PICO_MODE
     bool validate(char charToParse);
     #endif
-    void setPath(const char *path[], size_t pathSize);
+    void setPath(PGM_P *path, size_t pathSize);
     bool findValue(char charToParse);
     bool getValue(char charToParse, char *result, size_t resultSize);
 
   private:
-    const char **path;
+    PGM_P *path;
     size_t pathSize;
     #ifndef XML_PICO_MODE
     uint8_t tagChecksum;

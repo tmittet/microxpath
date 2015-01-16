@@ -7,6 +7,7 @@
 #######################################
 
 MicroXPath	KEYWORD1
+MicroXPath_P	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

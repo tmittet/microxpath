@@ -14,20 +14,26 @@
 /* You should have received a copy of the GNU General Public License    */
 /* along with this library. If not, see <http://www.gnu.org/licenses/>. */
 /*                                                                      */
-/* Written by Thomas Mittet (code@lookout.no) December 2014.            */
+/* Written by Thomas Mittet (code@lookout.no) January 2014.             */
 /************************************************************************/
 
 #include <SPI.h>
 #include <Ethernet.h>
-#include <MicroXPath.h>
+#include <MicroXPath_P.h>
+#include <avr/pgmspace.h>
 
 #define ETHERNET_MAC (byte[]) {0x54, 0x48, 0x4F, 0x4D, 0x41, 0x53}
 #define ETHERNET_STATIC_IP  (byte[]) {192, 168, 0, 123}
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
 
+const char g_BreakfastMenu[] PROGMEM = "breakfast_menu";
+const char g_Food[] PROGMEM = "food";
+const char g_Name[] PROGMEM = "name";
+const char g_Description[] PROGMEM = "description";
+
 EthernetClient client;
-MicroXPath xPath = MicroXPath();
+MicroXPath_P xPath = MicroXPath_P();
 
 void setup()
 {
@@ -63,7 +69,7 @@ void loop()
   if (client.available())
   {
     char result[100];
-    xPath.setPath((const char *[]){ "breakfast_menu", "food", "name" }, 3);
+    xPath.setPath((const char*[]){ g_BreakfastMenu, g_Food, g_Name }, 3);
     while (client.available())
     {
       if (xPath.getValue(client.read(), result, sizeof(result)))
@@ -74,7 +80,7 @@ void loop()
         break;
       }
     }
-    xPath.setPath((const char *[]){ "breakfast_menu", "food", "description" }, 3);
+    xPath.setPath((const char*[]){ g_BreakfastMenu, g_Food, g_Description }, 3);
     while (client.available())
     {
       if (xPath.getValue(client.read(), result, sizeof(result)))
