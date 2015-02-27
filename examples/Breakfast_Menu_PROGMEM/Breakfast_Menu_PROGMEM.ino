@@ -1,5 +1,5 @@
 /************************************************************************/
-/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.0. */
+/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.1. */
 /*                                                                      */
 /* This library is free software: you can redistribute it and/or modify */
 /* it under the terms of the GNU General Public License as published by */
@@ -22,8 +22,6 @@
 #include <MicroXPath_P.h>
 #include <avr/pgmspace.h>
 
-#define ETHERNET_MAC (byte[]) {0x54, 0x48, 0x4F, 0x4D, 0x41, 0x53}
-#define ETHERNET_STATIC_IP  (byte[]) {192, 168, 0, 123}
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
 
@@ -35,12 +33,15 @@ const char g_Description[] PROGMEM = "description";
 EthernetClient client;
 MicroXPath_P xPath = MicroXPath_P();
 
+byte g_mac[] = {0x54, 0x48, 0x4F, 0x4D, 0x41, 0x53};
+IPAddress g_ethernetStaticIP(192, 168, 0, 123);
+
 void setup()
 {
   Serial.begin(9600);
   while (!Serial);
 
-  if (Ethernet.begin(ETHERNET_MAC))
+  if (Ethernet.begin(g_mac))
   {
     Serial.println("Connecting...");
     Serial.flush();
@@ -48,7 +49,7 @@ void setup()
   else
   {
     Serial.println(ETHERNET_ERROR_DHCP);
-    Ethernet.begin(ETHERNET_MAC, ETHERNET_STATIC_IP);
+    Ethernet.begin(g_mac, g_ethernetStaticIP);
   }
   if (client.connect("www.w3schools.com", 80))
   {
@@ -69,7 +70,8 @@ void loop()
   if (client.available())
   {
     char result[100];
-    xPath.setPath((const char*[]){ g_BreakfastMenu, g_Food, g_Name }, 3);
+    const char *namePath[] = { g_BreakfastMenu, g_Food, g_Name };
+    xPath.setPath(namePath, 3);
     while (client.available())
     {
       if (xPath.getValue(client.read(), result, sizeof(result)))
@@ -80,7 +82,8 @@ void loop()
         break;
       }
     }
-    xPath.setPath((const char*[]){ g_BreakfastMenu, g_Food, g_Description }, 3);
+    const char *descriptionPath[] = { g_BreakfastMenu, g_Food, g_Description };
+    xPath.setPath(descriptionPath, 3);
     while (client.available())
     {
       if (xPath.getValue(client.read(), result, sizeof(result)))

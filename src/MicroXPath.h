@@ -1,5 +1,5 @@
 /************************************************************************/
-/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.0. */
+/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.1. */
 /*                                                                      */
 /* This library is free software: you can redistribute it and/or modify */
 /* it under the terms of the GNU General Public License as published by */

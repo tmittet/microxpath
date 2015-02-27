@@ -1,5 +1,5 @@
 /************************************************************************/
-/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.0. */
+/* MicroXPath lib, an XML navigator with a tiny memory footprint, v1.1. */
 /*                                                                      */
 /* This library is free software: you can redistribute it and/or modify */
 /* it under the terms of the GNU General Public License as published by */
@@ -56,14 +56,14 @@ void MicroXPath_P::setPath(PGM_P *path, size_t pathSize)
   for (uint8_t i = 0; i < pathSize && i < this->pathSize && i < matchLevel && i == newMatchLevel; i++)
   {
     uint8_t len = strlen_P(path[i]);
-	if (strlen_P(this->path[i]) == len)
-	{
+    if (strlen_P(this->path[i]) == len)
+    {
       for (uint8_t j = 0; j < len; j++)
-	  {
+      {
         if (pgm_read_byte(path[i] + j) != pgm_read_byte(this->path[i] + j)) break;
         if (j == len - 1) newMatchLevel++;
       }
-	}
+    }
   }
   this->matchCount = 0;
   this->matchLevel = newMatchLevel;
