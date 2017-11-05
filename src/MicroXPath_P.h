@@ -81,8 +81,8 @@ class MicroXPath_P {
     uint8_t checksum;
     #endif
     uint8_t level;
-    uint8_t position;
-    uint8_t matchCount;
+    uint16_t position;
+    uint16_t matchCount;
     uint8_t matchLevel;
 
     bool find(char charToParse /* , const char *attributeName, const char *attributeValue */);
