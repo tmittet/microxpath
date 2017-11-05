@@ -93,7 +93,7 @@ bool MicroXPath_P::getValue(char charToParse, char *result, size_t resultSize)
           matchCount++;
         }
       }
-      else if (state == XML_PARSER_END_TAG)
+      else if (state == XML_PARSER_END_TAG && position == 0)
       {
         // Remove trailing whitespace
         char *end = result + strlen(result);
