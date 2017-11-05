@@ -14,24 +14,18 @@
 /* You should have received a copy of the GNU General Public License    */
 /* along with this library. If not, see <http://www.gnu.org/licenses/>. */
 /*                                                                      */
-/* Written by Thomas Mittet (code@lookout.no) January 2014.             */
+/* Written by Thomas Mittet (code@lookout.no) December 2014.            */
 /************************************************************************/
 
 #include <SPI.h>
 #include <Ethernet.h>
-#include <MicroXPath_P.h>
-#include <avr/pgmspace.h>
+#include <MicroXPath.h>
 
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
 
-const char g_BreakfastMenu[] PROGMEM = "breakfast_menu";
-const char g_Food[] PROGMEM = "food";
-const char g_Name[] PROGMEM = "name";
-const char g_Description[] PROGMEM = "description";
-
 EthernetClient client;
-MicroXPath_P xPath = MicroXPath_P();
+MicroXPath xPath = MicroXPath();
 
 byte g_mac[] = {0x54, 0x48, 0x4F, 0x4D, 0x41, 0x53};
 IPAddress g_ethernetStaticIP(192, 168, 0, 123);
@@ -51,11 +45,11 @@ void setup()
     Serial.println(ETHERNET_ERROR_DHCP);
     Ethernet.begin(g_mac, g_ethernetStaticIP);
   }
-  if (client.connect("www.w3schools.com", 80))
+  if (client.connect("www.xmlfiles.com", 80))
   {
-    Serial.println("Connected: www.w3schools.com/xml/simple.xml");
-    client.println("GET /xml/simple.xml HTTP/1.1");
-    client.println("Host: www.w3schools.com");
+    Serial.println("Connected: www.xmlfiles.com/examples/cd_catalog.xml");
+    client.println("GET /examples/cd_catalog.xml HTTP/1.1");
+    client.println("Host: www.xmlfiles.com");
     client.println("Connection: close");
     client.println();
   }
@@ -70,7 +64,7 @@ void loop()
   if (client.available())
   {
     char result[100];
-    const char *namePath[] = { g_BreakfastMenu, g_Food, g_Name };
+    const char *namePath[] = { "CATALOG", "CD", "TITLE" };
     xPath.setPath(namePath, 3);
     while (client.available())
     {
@@ -82,7 +76,7 @@ void loop()
         break;
       }
     }
-    const char *descriptionPath[] = { g_BreakfastMenu, g_Food, g_Description };
+    const char *descriptionPath[] = { "CATALOG", "CD", "ARTIST" };
     xPath.setPath(descriptionPath, 3);
     while (client.available())
     {
