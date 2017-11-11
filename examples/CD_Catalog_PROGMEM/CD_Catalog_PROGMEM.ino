@@ -20,7 +20,6 @@
 #include <SPI.h>
 #include <Ethernet.h>
 #include <MicroXPath_P.h>
-#include <avr/pgmspace.h>
 
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
