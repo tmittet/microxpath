@@ -89,7 +89,7 @@ bool MicroXPath_P::getValue(char charToParse, char *result, size_t resultSize)
         if (position > 0 && matchCount < resultSize - 1)
         {
           *(result + matchCount) = charToParse;
-          *(result + matchCount + 1) = NULL;
+          *(result + matchCount + 1) = '\0';
           matchCount++;
         }
       }
@@ -98,7 +98,7 @@ bool MicroXPath_P::getValue(char charToParse, char *result, size_t resultSize)
         // Remove trailing whitespace
         char *end = result + strlen(result);
         while (end > result && isspace(*(end - 1))) end--;
-        *end = NULL;
+        *end = '\0';
         return true;
       }
     }
